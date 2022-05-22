@@ -17,15 +17,50 @@ public class MagicSquare {
 
     // implement these three methods
     public ArrayList<Integer> sumsOfRows() {
-        return new ArrayList<>();
+        ArrayList<Integer> values = new ArrayList<>();
+
+        for (int i = 0; i < this.square.length; i++) {
+            int total = 0;
+            for (int j = 0; j < this.square[i].length; j++) {
+                total += this.square[i][j];
+            }
+            values.add(total);
+        }
+
+        return values;
     }
 
     public ArrayList<Integer> sumsOfColumns() {
-        return new ArrayList<>();
+        ArrayList<Integer> values = new ArrayList<>();
+
+        for (int i = 0; i < this.square.length; i++) {
+            int total = 0;
+            for (int j = 0; j < this.square[i].length; j++) {
+                total += this.square[j][i];
+            }
+
+            values.add(total);
+        }
+
+        return values;
     }
 
     public ArrayList<Integer> sumsOfDiagonals() {
-        return new ArrayList<>();
+        ArrayList<Integer> values = new ArrayList<>();
+
+        int leftTotal = 0;
+        int rightTotal = 0;
+
+        for (int i = 0; i < this.square.length; i++) {
+            leftTotal += this.square[i][i];
+
+            rightTotal += this.square[i][this.square.length - (i + 1)];
+        }
+
+        values.add(leftTotal);
+        values.add(rightTotal);
+
+        return values;
     }
 
     // ready-made helper methods -- don't touch these
@@ -90,6 +125,7 @@ public class MagicSquare {
         }
 
         this.square[y][x] = value;
+        System.out.println(this.toString());
     }
 
     public int getWidth() {
@@ -112,5 +148,21 @@ public class MagicSquare {
         }
 
         return result.toString();
+    }
+
+    public int transformColumn(int column) {
+        if (column < 0 || column >= this.getWidth()) {
+            return 0;
+        }
+
+        return column;
+    }
+
+    public int transformRow(int row) {
+        if (row < 0 || row >= this.getHeight()) {
+            return this.getHeight() - 1;
+        }
+
+        return row;
     }
 }
